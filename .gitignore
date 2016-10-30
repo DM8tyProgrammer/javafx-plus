@@ -1,4 +1,17 @@
 *.class
+target/
+
+
+#IDE files
+## eclipse file
+.setting
+.project
+.classpath
+.metadata
+
+## intelliJ
+.idea/
+*.iml
 
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/

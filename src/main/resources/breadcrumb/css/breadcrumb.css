@@ -1,0 +1,38 @@
+.breadcrumb .button {
+    -fx-background-color: none;
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-text-fill : derive(#000,10%);
+    -fx-font-size: 14px;
+    -fx-padding:5;
+    -fx-cursor: hand;
+}
+
+
+.breadcrumb .separator {
+    -fx-text-fill : #aaa;
+    -fx-font-size: 24px;
+    -fx-padding: -1 5;
+}
+
+.breadcrumb .button:hover {
+    -fx-text-fill : derive(#000,50%);
+    -fx-underline: true;
+}
+
+.breadcrumb .button:disabled {
+    -fx-text-fill: red;
+    -fx-text-fill : derive(#000,50%);
+    -fx-opacity:1;
+    -fx-font-weight: 600;
+    -fx-underline: true;
+}
+
+.breadcrumb {
+    -fx-border-width:1;
+    -fx-border-color:#ccc;
+    -fx-padding:5 10;
+    -fx-background-color: #ededed;
+    /*-fx-effect: innershadow(gaussian,#ccc,4,0.5,0,0);*/
+
+}
