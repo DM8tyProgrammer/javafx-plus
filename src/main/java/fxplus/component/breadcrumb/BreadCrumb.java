@@ -1,9 +1,14 @@
-package fxplus.breadcrumb;
+package fxplus.component.breadcrumb;
 
 
+import javafx.beans.DefaultProperty;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,11 +16,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+import java.util.List;
+
 public class BreadCrumb extends HBox {
 
-    public  static final String BREADCRUMB_STYLE_CLASS = "breadcrumb";
+    public static final String BREADCRUMB_STYLE_CLASS = "breadcrumb";
     public static final String SEPARATOR_STYLE_CLASS = "separator";
-    public  static Image ARROW_IMAGE  = new Image("breadcrumb/image/>_cdcdcd.png");
 
     public static final LabelSeparatorFactory LABEL_SEPARATOR_FACTORY = new LabelSeparatorFactory() {
         private String separator = "/";
@@ -46,18 +52,30 @@ public class BreadCrumb extends HBox {
     };
 
 
+    private ObservableList<Node> buttons;
     private ObjectProperty<SeparatorFactory> separatorFactory;
 
     private SimpleObjectProperty<Button> currentButton;
 
 
     public BreadCrumb() {
-        this.getStyleClass().add(BREADCRUMB_STYLE_CLASS);
-        this.getStylesheets().add("breadcrumb/css/breadcrumb.css");
-        currentButton = new SimpleObjectProperty<>(null);
-        this.setSeparator(ARROW_IMAGE);
+        this.separatorFactory = new SimpleObjectProperty<>();
+        this.currentButton = new SimpleObjectProperty<>(null);
+        this.buttons = FXCollections.observableArrayList();
 
-        currentButton.addListener((observable, oldValue, newValue) -> {
+        this.getStyleClass().add(BREADCRUMB_STYLE_CLASS);
+        this.getStylesheets().add("component/breadcrumb/css/breadcrumb.css");
+
+        this.prefHeight(50);
+        this.prefWidth(500);
+
+        this.setWidth(500);
+        this.setHeight(50);
+
+        this.setSeparator(new Image(this.getClass().getClassLoader().getResourceAsStream("component/breadcrumb/image/arrow.png")));
+
+
+        this.currentButton.addListener((observable, oldValue, newValue) -> {
 
             //enable earliar button
             if(null != oldValue) {
@@ -79,31 +97,44 @@ public class BreadCrumb extends HBox {
             return;
         }
 
-        currentButton.set(button);
+        buttons.add(button);
+
+        this.currentButton.set(button);
 
         button.addEventHandler(ActionEvent.ACTION, event -> {
-            int i = this.getChildren().indexOf(button);
+            int i = super.getChildren().indexOf(button);
             if(null != separatorFactory) {
-                this.getChildren().remove(i + 2, this.getChildren().size());
+                super.getChildren().remove(i + 2, super.getChildren().size());
             } else {
-                this.getChildren().remove(i + 1, this.getChildren().size());
+                super.getChildren().remove(i + 1, super.getChildren().size());
             }
-            currentButton.set(button);
+            this.currentButton.set(button);
         });
 
 
         if(null != separatorFactory) {
-            this.getChildren().addAll(button,this.separatorFactory.get().produce());
+            super.getChildren().addAll(button,this.separatorFactory.get().produce());
         }else {
-            this.getChildren().addAll(button);
+            super.getChildren().addAll(button);
         }
 
     }
+
 
     public void addButton(Button ... buttons) {
         for(Button b : buttons) {
             this.addButton(b);
         }
+    }
+
+    public void setButtons(Button ... buttons) {
+        for(Button b : buttons) {
+            this.addButton(b);
+        }
+    }
+
+    public void getButtons() {
+
     }
 
     public void setSeparatorFactory(SeparatorFactory separatorFactory) {
@@ -113,6 +144,7 @@ public class BreadCrumb extends HBox {
             return node;
         });
     }
+
 
 
     public void setSeparator(Image image) {
