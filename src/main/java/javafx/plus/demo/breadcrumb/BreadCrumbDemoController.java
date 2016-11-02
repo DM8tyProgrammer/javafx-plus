@@ -1,8 +1,8 @@
-package fxplus.demo.breadcrumb;
+package javafx.plus.demo.breadcrumb;
 
 
 import javafx.fxml.FXML;
-import fxplus.component.breadcrumb.BreadCrumb;
+import javafx.plus.component.breadcrumb.BreadCrumb;
 import javafx.scene.control.Button;
 
 /**

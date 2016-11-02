@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>theBeacon</groupId>
-    <artifactId>fx-plus</artifactId>
+    <artifactId>javafx-plus</artifactId>
     <version>0.0.0</version>
 
     <build>

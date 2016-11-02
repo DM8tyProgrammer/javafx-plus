@@ -1,4 +1,4 @@
 /**
  * Contains all the general utilities
  */
-package fxplus.util;
+package javafx.plus.util;

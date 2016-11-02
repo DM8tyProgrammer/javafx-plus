@@ -1,4 +1,4 @@
-package fxplus.demo.breadcrumb;
+package javafx.plus.demo.breadcrumb;
 
 
 import javafx.application.Application;

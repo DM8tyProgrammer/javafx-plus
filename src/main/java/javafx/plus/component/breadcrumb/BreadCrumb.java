@@ -1,4 +1,4 @@
-package fxplus.component.breadcrumb;
+package javafx.plus.component.breadcrumb;
 
 
 import javafx.beans.DefaultProperty;

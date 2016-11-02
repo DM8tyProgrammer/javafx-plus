@@ -1,4 +1,4 @@
-package fxplus.util;
+package javafx.plus.util;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
