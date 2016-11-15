@@ -6,6 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ * @author theBeacon
+ */
 public class BreadCrumbDemo extends Application {
 
     @Override

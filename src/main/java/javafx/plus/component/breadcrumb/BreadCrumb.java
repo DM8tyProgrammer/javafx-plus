@@ -18,6 +18,9 @@ import javafx.scene.layout.HBox;
 
 import java.util.List;
 
+/**
+ * @author theBeacon
+ */
 public class BreadCrumb extends HBox {
 
     public static final String BREADCRUMB_STYLE_CLASS = "breadcrumb";
@@ -52,7 +55,6 @@ public class BreadCrumb extends HBox {
     };
 
 
-    private ObservableList<Node> buttons;
     private ObjectProperty<SeparatorFactory> separatorFactory;
 
     private SimpleObjectProperty<Button> currentButton;
@@ -61,7 +63,6 @@ public class BreadCrumb extends HBox {
     public BreadCrumb() {
         this.separatorFactory = new SimpleObjectProperty<>();
         this.currentButton = new SimpleObjectProperty<>(null);
-        this.buttons = FXCollections.observableArrayList();
 
         this.getStyleClass().add(BREADCRUMB_STYLE_CLASS);
         this.getStylesheets().add("component/breadcrumb/css/breadcrumb.css");
@@ -97,7 +98,6 @@ public class BreadCrumb extends HBox {
             return;
         }
 
-        buttons.add(button);
 
         this.currentButton.set(button);
 
