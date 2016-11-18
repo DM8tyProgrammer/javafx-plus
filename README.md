@@ -1,4 +1,4 @@
-# javaFx-plus ![build status](https://travis-ci.org/theBeacon/javafx-plus.svg?branch=master "build status")
+# javaFx-plus
 javaFx-plus is a **JavaFx** extension presenting a set of GUI component.
 
 ### Documentation
