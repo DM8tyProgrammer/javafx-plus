@@ -37,22 +37,12 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
     private ObjectProperty<ButtonBase> last;
 
     public ButtonGroupSkin(ButtonGroup buttonGroup) {
+
         super(buttonGroup);
         this.buttonGroup = buttonGroup;
 
-        FXMLLoader horizontalLoader = new FXMLLoader();
-        horizontalLoader.setLocation(ButtonGroupSkin.class.getClassLoader().getResource(HORIZONTAL_FXML));
+        loadStructure();
 
-        FXMLLoader verticalLoader = new FXMLLoader();
-        verticalLoader.setLocation(ButtonGroupSkin.class.getClassLoader().getResource(VERTICAL_FXML));
-
-        try {
-            horizontalPane = horizontalLoader.load();
-            verticalPane = verticalLoader.load();
-
-        } catch (IOException exception) {
-            throw new RuntimeException(exception);
-        }
 
         if(buttonGroup.getOrientation() == ButtonGroup.Orientation.HORIZONTAL) {
             currentPane = horizontalPane;
@@ -60,10 +50,11 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
             currentPane = verticalPane;
         }
 
+
+
+        // for adding class to first and last button
         this.first = new SimpleObjectProperty<>();
         this.last = new SimpleObjectProperty<>();
-
-
 
         first.addListener((o,oldValue,newValue)->{
             if(null != newValue) {
@@ -83,41 +74,21 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
             }
         });
 
+
         if(null!= buttonGroup.getButtons() && !buttonGroup.getButtons().isEmpty()) {
             first.setValue(buttonGroup.getButtons().get(0));
-            last.setValue((buttonGroup.getButtons().get(buttonGroup.getButtons().size()-1)));
-        }
+            last.setValue((buttonGroup.getButtons().get(buttonGroup.getButtons().size() - 1)));
 
-        buttonGroup.getButtons().addListener(new InvalidationListener() {
-            @Override
-            public void invalidated(Observable observable) {
-                if(null!= buttonGroup.getButtons() && !buttonGroup.getButtons().isEmpty()) {
-                    first.setValue(buttonGroup.getButtons().get(0));
-                    last.setValue((buttonGroup.getButtons().get(buttonGroup.getButtons().size()-1)));
-                }
-            }
-        });
-
-
-
-
-        verticalPane.getChildren().addListener(new ListChangeListener<Node>() {
-            @Override
-            public void onChanged(Change<? extends Node> c) {
-                c.next();
-                if(c.wasAdded()) {
-                    List<Node> nodes = verticalPane.getChildren().subList(c.getFrom(),c.getTo());
-                    for(Node node : nodes ){
-
-                        if(node instanceof ButtonBase) {
-                            ButtonBase bb = (ButtonBase) node;
-                            bb.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-
-                        }
+            buttonGroup.getButtons().addListener(new InvalidationListener() {
+                @Override
+                public void invalidated(Observable observable) {
+                    if (!buttonGroup.getButtons().isEmpty()) {
+                        first.setValue(buttonGroup.getButtons().get(0));
+                        last.setValue((buttonGroup.getButtons().get(buttonGroup.getButtons().size() - 1)));
                     }
                 }
-            }
-        });
+            });
+        }
 
 
         buttonGroup.orientationProperty().addListener((observable, oldValue, newValue) -> {
@@ -128,6 +99,48 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
         super.getChildren().add(currentPane);
 
     }
+
+
+
+    private void loadStructure() {
+
+        FXMLLoader horizontalLoader = new FXMLLoader();
+        horizontalLoader.setLocation(ButtonGroupSkin.class.getClassLoader().getResource(HORIZONTAL_FXML));
+
+        FXMLLoader verticalLoader = new FXMLLoader();
+        verticalLoader.setLocation(ButtonGroupSkin.class.getClassLoader().getResource(VERTICAL_FXML));
+
+        try {
+            horizontalPane = horizontalLoader.load();
+            verticalPane = verticalLoader.load();
+
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
+
+
+
+        // for button to span full width of vertical
+        verticalPane.getChildren().addListener(new ListChangeListener<Node>() {
+            @Override
+            public void onChanged(Change<? extends Node> c) {
+                while (c.next()) {
+                    if (c.wasAdded()) {
+                        List<Node> nodes = verticalPane.getChildren().subList(c.getFrom(), c.getTo());
+                        for (Node node : nodes) {
+                            if (node instanceof ButtonBase) {
+                                ButtonBase bb = (ButtonBase) node;
+                                bb.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+                            }
+                        }
+                    }
+                }
+            }
+        });
+
+
+    }
+
     public void changeLayout(ButtonGroup.Orientation orientation) {
 
             Pane targetPane = orientation == ButtonGroup.Orientation.VERTICAL ? verticalPane : horizontalPane;

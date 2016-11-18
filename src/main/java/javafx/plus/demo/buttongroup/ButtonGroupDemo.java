@@ -3,6 +3,7 @@ package javafx.plus.demo.buttongroup;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.plus.component.buttongroup.ButtonGroup;
 import javafx.plus.demo.breadcrumb.BreadCrumbDemo;
 import javafx.plus.util.ButtonBuilder;
@@ -12,6 +13,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 /**
  * @author theBeacon
@@ -21,7 +23,6 @@ public class ButtonGroupDemo extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        primaryStage.setMaximized(true);
 
         ButtonGroup bg = new ButtonGroup();
 
@@ -29,8 +30,8 @@ public class ButtonGroupDemo extends Application {
 
 
         AnchorPane pane = new AnchorPane();
-        AnchorPane.setTopAnchor(bg,10.0);
-        AnchorPane.setLeftAnchor(bg,10.0);
+        AnchorPane.setTopAnchor(bg,0.0);
+        AnchorPane.setLeftAnchor(bg,0.0);
 
 
         Button changeLayoutButton = ButtonBuilder.newBuilder().label("Change Layout").on(event -> {
@@ -44,6 +45,7 @@ public class ButtonGroupDemo extends Application {
         AnchorPane.setLeftAnchor(changeLayoutButton,250.0);
         AnchorPane.setTopAnchor(changeLayoutButton,250.0);
 
+        pane.setPadding(new Insets(10));
 
 
         pane.getChildren().addAll(bg,changeLayoutButton);

@@ -19,7 +19,7 @@ public class ButtonGroup extends Control {
 
     public enum Orientation  {HORIZONTAL, VERTICAL};
 
-    private ObservableList<ButtonBase> buttons;
+    private ObjectProperty<ObservableList<ButtonBase>> buttons;
 
     private ObjectProperty<Orientation> orientation;
     public ButtonGroup() {
@@ -27,15 +27,19 @@ public class ButtonGroup extends Control {
     }
 
     public ButtonGroup(ObservableList<ButtonBase> buttons) {
-        this.buttons = buttons;
+        this.buttons = new SimpleObjectProperty<>(buttons);
         orientation = new SimpleObjectProperty<>(Orientation.HORIZONTAL);
     }
 
     public void addButton(ButtonBase button) {
-        buttons.add(button);
+
+        if(null == buttons.get()) {
+            buttons.setValue(FXCollections.observableArrayList());
+        }
+
+        buttons.get().add(button);
 
     }
-
 
     public void addButtons(ButtonBase ... buttons) {
         for(ButtonBase button : buttons){
@@ -44,9 +48,11 @@ public class ButtonGroup extends Control {
     }
 
     public ObservableList<ButtonBase> getButtons() {
-        return this.buttons;
+        return this.buttons.get();
     }
 
+
+    //Orientation
     public Orientation getOrientation() {
         return orientation.get();
     }
