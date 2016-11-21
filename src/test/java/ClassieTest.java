@@ -15,9 +15,7 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static mockit.Deencapsulation.invoke;
-import static org.hamcrest.Matchers.hasItems;
-import static org.hamcrest.Matchers.is;
-import static org.hamcrest.Matchers.iterableWithSize;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created by theBeacon
@@ -107,6 +105,18 @@ public class ClassieTest {
 
         Classie.toggle(node,"bruce");
         Assert.assertThat(node.getStyleClass().contains("bruce"),is(false));
+    }
+
+
+    @Test
+    public void testRemoveByPattern() {
+        Node node = new Button();
+        node.getStyleClass().addAll("iron-man","super-man","spider-man","he-man","hulk","thor");
+
+        //remove all men
+        Classie.removeByPattern(node,".*-man");
+        Assert.assertThat(node.getStyleClass(),hasItems("hulk","thor"));
+        Assert.assertThat(node.getStyleClass(),not(contains("iron-man","spider-man","super-man","he-man")));
     }
 
 }

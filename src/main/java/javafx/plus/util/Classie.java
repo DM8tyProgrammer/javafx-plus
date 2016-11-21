@@ -3,6 +3,9 @@ package javafx.plus.util;
 import javafx.scene.Node;
 
 import java.util.Arrays;
+import java.util.Iterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Inspired By Classie.js
@@ -52,4 +55,16 @@ public class Classie {
             Classie.add(node,styleClass);
         }
     }
+
+    public static void removeByPattern(Node node, String regex) {
+        Pattern pattern = Pattern.compile(regex);
+        Iterator<String> iterable = node.getStyleClass().iterator();
+        for(;iterable.hasNext();) {
+
+            if(pattern.matcher(iterable.next()).find()){
+                iterable.remove();
+            }
+        }
+    }
+
 }
