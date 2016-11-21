@@ -1,11 +1,8 @@
 package javafx.plus.component.buttongroup;
 
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
-import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.plus.util.Classie;
 import javafx.scene.Node;
