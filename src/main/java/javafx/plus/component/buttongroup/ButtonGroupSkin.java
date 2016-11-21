@@ -39,16 +39,7 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
         super(buttonGroup);
         this.buttonGroup = buttonGroup;
 
-        loadStructure();
-
-
-        if(buttonGroup.getOrientation() == ButtonGroup.Orientation.HORIZONTAL) {
-            currentPane = horizontalPane;
-        } else {
-            currentPane = verticalPane;
-        }
-
-
+        currentPane = this.loadContainer(buttonGroup.getOrientation());
 
         // for adding class to first and last button
         this.first = new SimpleObjectProperty<>();
@@ -113,7 +104,7 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
 
 
 
-    private void loadStructure() {
+    private Pane loadContainer(ButtonGroup.Orientation orientation) {
 
         FXMLLoader horizontalLoader = new FXMLLoader();
         horizontalLoader.setLocation(ButtonGroupSkin.class.getClassLoader().getResource(HORIZONTAL_FXML));
@@ -149,6 +140,8 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
             }
         });
 
+
+        return orientation == ButtonGroup.Orientation.HORIZONTAL? horizontalPane : verticalPane;
 
     }
 
