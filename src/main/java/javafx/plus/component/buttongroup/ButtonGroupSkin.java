@@ -5,6 +5,7 @@ import javafx.beans.Observable;
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.ListChangeListener;
+import javafx.event.Event;
 import javafx.fxml.FXMLLoader;
 import javafx.plus.util.Classie;
 import javafx.scene.Node;
@@ -61,7 +62,7 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
                 Classie.add(newValue,FIRST_STYLE_CLASS);
             }
             if(null != oldValue) {
-                Classie.remove(newValue,FIRST_STYLE_CLASS);
+                Classie.remove(oldValue,FIRST_STYLE_CLASS);
             }
         });
 
@@ -70,7 +71,7 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
                 Classie.add(newValue,LAST_STYLE_CLASS);
             }
             if(null != oldValue) {
-                Classie.remove(newValue,LAST_STYLE_CLASS);
+                Classie.remove(oldValue,LAST_STYLE_CLASS);
             }
         });
 
@@ -79,14 +80,27 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
             first.setValue(buttonGroup.getButtons().get(0));
             last.setValue((buttonGroup.getButtons().get(buttonGroup.getButtons().size() - 1)));
 
-            buttonGroup.getButtons().addListener(new InvalidationListener() {
+            buttonGroup.getButtons().addListener(new ListChangeListener<ButtonBase>() {
                 @Override
-                public void invalidated(Observable observable) {
-                    if (!buttonGroup.getButtons().isEmpty()) {
+                public void onChanged(Change<? extends ButtonBase> c) {
+                    if(!buttonGroup.getButtons().isEmpty()) {
                         first.setValue(buttonGroup.getButtons().get(0));
                         last.setValue((buttonGroup.getButtons().get(buttonGroup.getButtons().size() - 1)));
                     }
+
+                    while (c.next()) {
+                        if(c.wasAdded()) {
+                            currentPane.getChildren().addAll(c.getAddedSubList());
+                        }
+                        if(c.wasRemoved()) {
+                            currentPane.getChildren().removeAll(c.getRemoved());
+                        }
+                        currentPane.requestLayout();
+                    }
+
                 }
+
+
             });
         }
 

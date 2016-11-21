@@ -6,7 +6,7 @@
 
     <groupId>theBeacon</groupId>
     <artifactId>javafx-plus</artifactId>
-    <version>0.0.0</version>
+    <version>0.0.1</version>
 
     <build>
         <plugins>
