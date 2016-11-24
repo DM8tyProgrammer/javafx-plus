@@ -18,8 +18,8 @@ public class Classie {
     }
 
     /**
-     *
-     * @param node
+     * Checks the presence of StyleClass(es) in node
+     * @param node to be inspected
      * @param styleClasses
      * @return true if all match
      */
@@ -29,20 +29,25 @@ public class Classie {
 
 
     /**
-     * Add styleClasses
-     * @param node
+     * Adds StyleClass(es) to a node
+     * @param node to which StyleClass(es) to be added
      * @param styleClasses
      */
     public static void add(Node node, String ... styleClasses) {
         node.getStyleClass().addAll(styleClasses);
     }
 
+    /**
+     * Removes StyleClass(es) from a node
+     * @param node from which StyleClass(es) to be removed
+     * @param styleClasses
+     */
     public static void remove(Node node, String ... styleClasses) {
         node.getStyleClass().removeAll(styleClasses);
     }
 
     /**
-     * Toggles(if there remove it, else add it) the style class.
+     * Toggles(if there remove it,else add it) the style class from/to a node
      *
      * @param node
      * @param styleClass
@@ -55,6 +60,12 @@ public class Classie {
         }
     }
 
+    /**
+     *
+     * Removes all the classes which match with regex from a node
+     * @param node
+     * @param regex
+     */
     public static void removeByPattern(Node node, String regex) {
         Pattern pattern = Pattern.compile(regex);
         Iterator<String> iterable = node.getStyleClass().iterator();

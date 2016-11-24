@@ -1,6 +1,8 @@
 package javafx.plus.component.buttongroup;
 
+import javafx.beans.property.ListProperty;
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleListProperty;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,7 +18,7 @@ public class ButtonGroup extends Control {
 
     public enum Orientation  {HORIZONTAL, VERTICAL};
 
-    private ObjectProperty<ObservableList<ButtonBase>> buttons;
+    private ListProperty<ButtonBase> buttons;
 
     private ObjectProperty<Orientation> orientation;
     public ButtonGroup() {
@@ -24,7 +26,7 @@ public class ButtonGroup extends Control {
     }
 
     public ButtonGroup(ObservableList<ButtonBase> buttons) {
-        this.buttons = new SimpleObjectProperty<>(buttons);
+        this.buttons = new SimpleListProperty<>(buttons);
         orientation = new SimpleObjectProperty<>(Orientation.HORIZONTAL);
     }
 

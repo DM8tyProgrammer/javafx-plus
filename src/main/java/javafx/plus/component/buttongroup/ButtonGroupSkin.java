@@ -2,9 +2,12 @@ package javafx.plus.component.buttongroup;
 
 import javafx.beans.property.ObjectProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ListChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.plus.util.Classie;
+import javafx.plus.util.ObservableListUtils;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonBase;
 import javafx.scene.control.SkinBase;
@@ -44,57 +47,22 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
         // for adding class to first and last button
         this.first = new SimpleObjectProperty<>();
         this.last = new SimpleObjectProperty<>();
+        this.first.addListener(new SidesValueChangeListener(FIRST_STYLE_CLASS));
+        this.last.addListener(new SidesValueChangeListener(LAST_STYLE_CLASS));
+        this.setSidesButton();
+        ObservableListUtils.bind(currentPane.getChildren(),buttonGroup.getButtons());
 
-        first.addListener((o,oldValue,newValue)->{
-            if(null != newValue) {
-                Classie.add(newValue,FIRST_STYLE_CLASS);
-            }
-            if(null != oldValue) {
-                Classie.remove(oldValue,FIRST_STYLE_CLASS);
-            }
-        });
-
-        last.addListener((o,oldValue,newValue)->{
-            if(null != newValue) {
-                Classie.add(newValue,LAST_STYLE_CLASS);
-            }
-            if(null != oldValue) {
-                Classie.remove(oldValue,LAST_STYLE_CLASS);
+        buttonGroup.getButtons().addListener(new ListChangeListener<ButtonBase>() {
+            @Override
+            public void onChanged(Change<? extends ButtonBase> c) {
+                setSidesButton();
+                currentPane.requestLayout();
             }
         });
-
-
-        if(null!= buttonGroup.getButtons() && !buttonGroup.getButtons().isEmpty()) {
-            first.setValue(buttonGroup.getButtons().get(0));
-            last.setValue((buttonGroup.getButtons().get(buttonGroup.getButtons().size() - 1)));
-
-            buttonGroup.getButtons().addListener(new ListChangeListener<ButtonBase>() {
-                @Override
-                public void onChanged(Change<? extends ButtonBase> c) {
-                    if(!buttonGroup.getButtons().isEmpty()) {
-                        first.setValue(buttonGroup.getButtons().get(0));
-                        last.setValue((buttonGroup.getButtons().get(buttonGroup.getButtons().size() - 1)));
-                    }
-
-                    while (c.next()) {
-                        if(c.wasAdded()) {
-                            currentPane.getChildren().addAll(c.getAddedSubList());
-                        }
-                        if(c.wasRemoved()) {
-                            currentPane.getChildren().removeAll(c.getRemoved());
-                        }
-                        currentPane.requestLayout();
-                    }
-
-                }
-
-
-            });
-        }
-
 
         buttonGroup.orientationProperty().addListener((observable, oldValue, newValue) -> {
             changeLayout(newValue);
+
         });
 
         currentPane.getChildren().addAll(buttonGroup.getButtons());
@@ -106,20 +74,14 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
 
     private Pane loadContainer(ButtonGroup.Orientation orientation) {
 
-        FXMLLoader horizontalLoader = new FXMLLoader();
-        horizontalLoader.setLocation(ButtonGroupSkin.class.getClassLoader().getResource(HORIZONTAL_FXML));
-
-        FXMLLoader verticalLoader = new FXMLLoader();
-        verticalLoader.setLocation(ButtonGroupSkin.class.getClassLoader().getResource(VERTICAL_FXML));
-
         try {
-            horizontalPane = horizontalLoader.load();
-            verticalPane = verticalLoader.load();
+            ClassLoader classLoader = ButtonGroupSkin.class.getClassLoader();
+            horizontalPane = FXMLLoader.load(classLoader.getResource(HORIZONTAL_FXML));
+            verticalPane = FXMLLoader.load(classLoader.getResource(VERTICAL_FXML));
 
         } catch (IOException exception) {
             throw new RuntimeException(exception);
         }
-
 
 
         // for button to span full width of vertical
@@ -145,6 +107,13 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
 
     }
 
+    private void setSidesButton() {
+        if(null!= buttonGroup.getButtons() && !buttonGroup.getButtons().isEmpty()) {
+            first.setValue(buttonGroup.getButtons().get(0));
+            last.setValue((buttonGroup.getButtons().get(buttonGroup.getButtons().size() - 1)));
+        }
+    }
+
     public void changeLayout(ButtonGroup.Orientation orientation) {
 
             Pane targetPane = orientation == ButtonGroup.Orientation.VERTICAL ? verticalPane : horizontalPane;
@@ -156,7 +125,27 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
             super.getChildren().addAll(targetPane);
             currentPane = targetPane;
 
+            ObservableListUtils.bind(currentPane.getChildren(),buttonGroup.getButtons());
     }
 
 
+
+    private static class SidesValueChangeListener implements ChangeListener<ButtonBase> {
+
+        private String styleClass;
+
+        SidesValueChangeListener(String styleClass) {
+         this.styleClass = styleClass;
+        }
+
+        @Override
+        public void changed(ObservableValue<? extends ButtonBase> observable, ButtonBase oldValue, ButtonBase newValue) {
+            if(null != newValue) {
+                Classie.add(newValue,this.styleClass);
+            }
+            if(null != oldValue) {
+                Classie.remove(oldValue,this.styleClass);
+            }
+        }
+    }
 }

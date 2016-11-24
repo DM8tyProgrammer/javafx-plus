@@ -7,6 +7,27 @@
     <groupId>theBeacon</groupId>
     <artifactId>javafx-plus</artifactId>
     <version>0.0.1</version>
+    <description>JavaFx-Plus is a JavaFx extension, a collections of components, functionalities and utilities, developed to ease and speed up development of Java Desktop Applications.</description>
+    <inceptionYear>2016</inceptionYear>
+    <url>https://github.com/theBeacon/javafx-plus</url>
+    <developers>
+        <developer>
+            <email>the.beacon.44@gmail.com</email>
+        </developer>
+    </developers>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <licenses>
+        <license>
+            <name>Apache License, Version 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+            <distribution>repo</distribution>
+            <comments>A business-friendly OSS license</comments>
+        </license>
+    </licenses>
 
     <build>
         <plugins>
