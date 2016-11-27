@@ -1,0 +1,22 @@
+.input-group {
+  -fx-fill-height: false;
+  -fx-border-radius: 3;
+  -fx-border-color: derive(#ececec, -23%);
+  -fx-border-width: 1; }
+  .input-group * {
+    -fx-background-radius: 0;
+    -fx-background-insets: 0;
+    -fx-border-width: 0; }
+  .input-group .label {
+    -fx-padding: 5 8; }
+  .input-group .left-add-ons * {
+    -fx-border-color: derive(#ececec, -23%);
+    -fx-border-width: 0 1 0 0; }
+  .input-group .right-add-ons * {
+    -fx-border-color: derive(#ececec, -23%);
+    -fx-border-width: 0 0 0 1; }
+
+.input-group .button-group {
+  -fx-border-width: 0; }
+
+/*# sourceMappingURL=input-group.css.map */

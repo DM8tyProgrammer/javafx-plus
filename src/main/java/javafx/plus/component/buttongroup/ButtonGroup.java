@@ -36,6 +36,8 @@ public class ButtonGroup extends Control {
             buttons.setValue(FXCollections.observableArrayList());
         }
 
+        button.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
+
         buttons.get().add(button);
 
     }

@@ -8,6 +8,7 @@ import javafx.collections.ListChangeListener;
 import javafx.fxml.FXMLLoader;
 import javafx.plus.util.Classie;
 import javafx.plus.util.ObservableListUtils;
+import javafx.plus.util.StyleClassTogglerOnValue;
 import javafx.scene.Node;
 import javafx.scene.control.ButtonBase;
 import javafx.scene.control.SkinBase;
@@ -25,7 +26,6 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
     private static final String VERTICAL_FXML = "component/buttongroup/fxml/vertical-button-group.fxml";
 
     private static final String FIRST_STYLE_CLASS = "first";
-    private static final String LAST_STYLE_CLASS = "last";
 
     private ButtonGroup buttonGroup;
     private Pane horizontalPane;
@@ -35,7 +35,6 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
 
     private ObjectProperty<ButtonBase> first;
 
-    private ObjectProperty<ButtonBase> last;
 
     public ButtonGroupSkin(ButtonGroup buttonGroup) {
 
@@ -46,9 +45,7 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
 
         // for adding class to first and last button
         this.first = new SimpleObjectProperty<>();
-        this.last = new SimpleObjectProperty<>();
-        this.first.addListener(new SidesValueChangeListener(FIRST_STYLE_CLASS));
-        this.last.addListener(new SidesValueChangeListener(LAST_STYLE_CLASS));
+        this.first.addListener(new StyleClassTogglerOnValue(FIRST_STYLE_CLASS));
         this.setSidesButton();
         ObservableListUtils.bind(currentPane.getChildren(),buttonGroup.getButtons());
 
@@ -83,26 +80,6 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
             throw new RuntimeException(exception);
         }
 
-
-        // for button to span full width of vertical
-        verticalPane.getChildren().addListener(new ListChangeListener<Node>() {
-            @Override
-            public void onChanged(Change<? extends Node> c) {
-                while (c.next()) {
-                    if (c.wasAdded()) {
-                        List<Node> nodes = verticalPane.getChildren().subList(c.getFrom(), c.getTo());
-                        for (Node node : nodes) {
-                            if (node instanceof ButtonBase) {
-                                ButtonBase bb = (ButtonBase) node;
-                                bb.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-                            }
-                        }
-                    }
-                }
-            }
-        });
-
-
         return orientation == ButtonGroup.Orientation.HORIZONTAL? horizontalPane : verticalPane;
 
     }
@@ -110,7 +87,6 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
     private void setSidesButton() {
         if(null!= buttonGroup.getButtons() && !buttonGroup.getButtons().isEmpty()) {
             first.setValue(buttonGroup.getButtons().get(0));
-            last.setValue((buttonGroup.getButtons().get(buttonGroup.getButtons().size() - 1)));
         }
     }
 
@@ -126,26 +102,5 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
             currentPane = targetPane;
 
             ObservableListUtils.bind(currentPane.getChildren(),buttonGroup.getButtons());
-    }
-
-
-
-    private static class SidesValueChangeListener implements ChangeListener<ButtonBase> {
-
-        private String styleClass;
-
-        SidesValueChangeListener(String styleClass) {
-         this.styleClass = styleClass;
-        }
-
-        @Override
-        public void changed(ObservableValue<? extends ButtonBase> observable, ButtonBase oldValue, ButtonBase newValue) {
-            if(null != newValue) {
-                Classie.add(newValue,this.styleClass);
-            }
-            if(null != oldValue) {
-                Classie.remove(oldValue,this.styleClass);
-            }
-        }
     }
 }

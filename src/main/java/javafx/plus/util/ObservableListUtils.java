@@ -12,7 +12,6 @@ public class ObservableListUtils {
 
     private ObservableListUtils () {
 
-
     }
 
 

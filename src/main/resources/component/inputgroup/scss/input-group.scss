@@ -1,0 +1,47 @@
+@import "../../scss/constant.scss";
+
+.input-group {
+
+	-fx-fill-height: false;
+
+	-fx-border-radius: 3;
+	-fx-border-color: $border-color;
+	-fx-border-width: 1;
+
+	*{
+		-fx-background-radius:0;
+		-fx-background-insets:0;
+		-fx-border-width:0;
+	}
+
+
+
+	.label {
+		-fx-padding: 5 8;
+	}
+
+	.left-add-ons {
+		* {
+			-fx-border-color: $border-color;
+			-fx-border-width: 0 1 0 0;
+		}
+ 		
+	}
+
+
+
+	.right-add-ons {
+
+		* {
+			-fx-border-color: $border-color;
+			-fx-border-width: 0 0 0 1;
+		}
+	}
+
+}
+
+.input-group {
+	.button-group {
+		-fx-border-width:0;
+	}
+}
