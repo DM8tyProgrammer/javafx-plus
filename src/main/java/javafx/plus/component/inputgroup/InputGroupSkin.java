@@ -78,7 +78,6 @@ public class InputGroupSkin extends SkinBase<InputGroup> {
         if(null!=rightAddOns && !rightAddOns.isEmpty()) {
             rightAddOnsPlaceholder.getChildren().addAll(rightAddOns);
         }
-
     }
 
     private void addToLeft(List<? extends Node> leftAddOns) {

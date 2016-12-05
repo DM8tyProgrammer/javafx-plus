@@ -3,9 +3,13 @@
 
 .button-group {
 
-    -fx-border-color: $border-color;
-    -fx-border-width: 1;
-    -fx-border-radius: 2;
+	.horizontal-button-group, 
+	.vertical-button-group {
+	  	-fx-border-color: $border-color;
+	    -fx-border-width: 1;
+	    -fx-border-radius: 2;
+	}
+ 
 
     .button,
     .toggle-button,

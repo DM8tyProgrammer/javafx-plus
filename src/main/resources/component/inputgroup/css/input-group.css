@@ -1,22 +1,43 @@
+/*
+ .label, .button, .split-menu-button
+*/
 .input-group {
   -fx-fill-height: false;
   -fx-border-radius: 3;
   -fx-border-color: derive(#ececec, -23%);
   -fx-border-width: 1; }
-  .input-group * {
+  .input-group .label {
+    -fx-padding: 5 8; }
+  .input-group .label,
+  .input-group .button,
+  .input-group .image-view,
+  .input-group .toggle-button,
+  .input-group .menu-item-button,
+  .input-group .split-menu-button,
+  .input-group .text-field,
+  .input-group .split-menu-button .arrow-button,
+  .input-group .button-group .horizontal-button-group {
     -fx-background-radius: 0;
     -fx-background-insets: 0;
     -fx-border-width: 0; }
-  .input-group .label {
-    -fx-padding: 5 8; }
-  .input-group .left-add-ons * {
-    -fx-border-color: derive(#ececec, -23%);
-    -fx-border-width: 0 1 0 0; }
-  .input-group .right-add-ons * {
-    -fx-border-color: derive(#ececec, -23%);
-    -fx-border-width: 0 0 0 1; }
+  .input-group .left-add-ons .label,
+  .input-group .left-add-ons .button,
+  .input-group .left-add-ons .image-view,
+  .input-group .left-add-ons .toggle-button,
+  .input-group .left-add-ons .split-menu-button .arrow-button {
+    -fx-border-width: 0 1 0 0;
+    -fx-border-color: derive(#ececec, -23%); }
+  .input-group .right-add-ons .label,
+  .input-group .right-add-ons .button,
+  .input-group .right-add-ons .image-view,
+  .input-group .right-add-ons .toggle-button,
+  .input-group .right-add-ons .split-menu-button .arrow-button {
+    -fx-border-width: 0 0 0 1;
+    -fx-border-color: derive(#ececec, -23%); }
 
 .input-group .button-group {
+  -fx-border-width: 0; }
+.input-group .menu-item > .label {
   -fx-border-width: 0; }
 
 /*# sourceMappingURL=input-group.css.map */

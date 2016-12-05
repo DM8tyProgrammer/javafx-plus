@@ -1,17 +1,18 @@
-.button-group {
+.button-group .horizontal-button-group,
+.button-group .vertical-button-group {
   -fx-border-color: derive(#ececec, -23%);
   -fx-border-width: 1;
   -fx-border-radius: 2; }
-  .button-group .button, .button-group .split-menu-button .label, .button-group .split-menu-button .arrow-button,
-  .button-group .toggle-button,
-  .button-group .menu-button,
-  .button-group .split-menu-button {
-    -fx-background-insets: 0;
-    -fx-background-radius: 0;
-    -fx-effect: null; }
-  .button-group .split-menu-button .arrow-button {
-    -fx-border-color: derive(#ececec, -23%);
-    -fx-border-width: 0 0 0 1; }
+.button-group .button, .button-group .split-menu-button .label, .button-group .split-menu-button .arrow-button,
+.button-group .toggle-button,
+.button-group .menu-button,
+.button-group .split-menu-button {
+  -fx-background-insets: 0;
+  -fx-background-radius: 0;
+  -fx-effect: null; }
+.button-group .split-menu-button .arrow-button {
+  -fx-border-color: derive(#ececec, -23%);
+  -fx-border-width: 0 0 0 1; }
 
 .horizontal-button-group .button, .horizontal-button-group .button-group .split-menu-button .label, .button-group .split-menu-button .horizontal-button-group .label, .horizontal-button-group .button-group .split-menu-button .arrow-button, .button-group .split-menu-button .horizontal-button-group .arrow-button,
 .horizontal-button-group .toggle-button,

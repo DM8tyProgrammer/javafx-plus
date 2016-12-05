@@ -1,5 +1,12 @@
 @import "../../scss/constant.scss";
 
+$ele: ".label" ".button" ".split-menu-button";
+$selector: join($ele,null,comma);
+
+
+/*
+ #{$selector}
+*/
 .input-group {
 
 	-fx-fill-height: false;
@@ -8,33 +15,49 @@
 	-fx-border-color: $border-color;
 	-fx-border-width: 1;
 
-	*{
-		-fx-background-radius:0;
-		-fx-background-insets:0;
-		-fx-border-width:0;
-	}
-
-
-
 	.label {
 		-fx-padding: 5 8;
 	}
 
-	.left-add-ons {
-		* {
-			-fx-border-color: $border-color;
-			-fx-border-width: 0 1 0 0;
-		}
- 		
+	.image-view {
+
 	}
 
+	.label,
+	.button,
+	.image-view,
+	.toggle-button,
+	.menu-item-button,
+	.split-menu-button,
+	.text-field,
+	.split-menu-button .arrow-button,
+	.button-group .horizontal-button-group {
+		-fx-background-radius: 0;
+		-fx-background-insets: 0;
+		-fx-border-width: 0;
 
+	}
+
+	.left-add-ons {
+		.label,
+		.button,
+		.image-view,
+		.toggle-button,
+		.split-menu-button .arrow-button {
+			-fx-border-width: 0 1 0 0;
+			-fx-border-color: $border-color;
+		}
+
+	}
 
 	.right-add-ons {
-
-		* {
-			-fx-border-color: $border-color;
+		.label,
+		.button, 
+		.image-view,
+		.toggle-button,
+		.split-menu-button .arrow-button {
 			-fx-border-width: 0 0 0 1;
+			-fx-border-color: $border-color;
 		}
 	}
 
@@ -42,6 +65,10 @@
 
 .input-group {
 	.button-group {
+		-fx-border-width:0;
+	}
+
+	.menu-item > .label {
 		-fx-border-width:0;
 	}
 }

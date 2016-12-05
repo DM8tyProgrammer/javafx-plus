@@ -16,11 +16,13 @@ import javafx.scene.control.Skin;
  */
 public class ButtonGroup extends Control {
 
+    private static final String CONTROL_STYLE_CLASS = "button-group";
     public enum Orientation  {HORIZONTAL, VERTICAL};
 
-    private ListProperty<ButtonBase> buttons;
 
+    private ListProperty<ButtonBase> buttons;
     private ObjectProperty<Orientation> orientation;
+
     public ButtonGroup() {
         this(FXCollections.observableArrayList());
     }
@@ -28,18 +30,16 @@ public class ButtonGroup extends Control {
     public ButtonGroup(ObservableList<ButtonBase> buttons) {
         this.buttons = new SimpleListProperty<>(buttons);
         orientation = new SimpleObjectProperty<>(Orientation.HORIZONTAL);
+        this.getStyleClass().add(CONTROL_STYLE_CLASS);
     }
 
     public void addButton(ButtonBase button) {
-
         if(null == buttons.get()) {
             buttons.setValue(FXCollections.observableArrayList());
         }
 
         button.setMaxSize(Double.MAX_VALUE,Double.MAX_VALUE);
-
         buttons.get().add(button);
-
     }
 
     public void addButtons(ButtonBase ... buttons) {
@@ -54,14 +54,12 @@ public class ButtonGroup extends Control {
 
 
     //Orientation
+    public ObjectProperty<Orientation> orientationProperty(){
+        return  orientation;
+    }
     public Orientation getOrientation() {
         return orientation.get();
     }
-    public ObjectProperty<Orientation> orientationProperty(){
-        return  orientation;
-    };
-
-
     public void setOrientation(Orientation orientation) {
         this.orientation.setValue(orientation);
     }

@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 
 /**
+ *
  * @author theBeacon
  */
 public class InputGroup extends Control {

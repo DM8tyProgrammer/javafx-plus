@@ -6,6 +6,7 @@ import javafx.collections.ObservableList;
 import java.util.function.Consumer;
 
 /**
+ * Contains all the List related utilities
  * @author theBeacon
  */
 public class ObservableListUtils {
@@ -15,6 +16,12 @@ public class ObservableListUtils {
     }
 
 
+    /**
+     *
+     * @param target
+     * @param source
+     * @param <E>
+     */
     public static <E> void bind(ObservableList<E> target,ObservableList<? extends E> source ){
         source.addListener(new ListChangeListener<E>() {
             @Override
