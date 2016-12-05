@@ -7,8 +7,9 @@ import java.util.Iterator;
 import java.util.regex.Pattern;
 
 /**
- * Inspired By Classie.js
- * Classie is utility made for add,remove,checking styleclass to a node
+ *
+ * Classie is utility made for add,remove,checking styleclass to a node.
+ * It is inspired by popular javascript Classie.js.
  *
  * @author theBeacon
  */

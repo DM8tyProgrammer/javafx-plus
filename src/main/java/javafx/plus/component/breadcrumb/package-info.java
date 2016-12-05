@@ -1,4 +1,4 @@
 /**
- * This package contains BreadCrumbDemo related functionalities and utilities.
+ * Contains breadcrumb component and its associated class(es).
  */
 package javafx.plus.component.breadcrumb;
