@@ -5,10 +5,17 @@
 javaFx-plus is a **JavaFx** extension presenting a set of GUI component.
 
 ### Documentation
+
+#### Guide
 https://github.com/theBeacon/javafx-plus/wiki
 
-A project is also created which showcases example of components developed so far.
+#### JavaDocs
 
+https://thebeacon.github.io/javafx-plus/javadocs/
+
+#### Examples
+
+A project is also created which showcases example of components developed so far.
 https://github.com/theBeacon/javafx-plus-demo
 
 
@@ -21,8 +28,6 @@ JDK 1.8 or above with maven installed
 One can build the project simply typing the below command:
 
 `mvn clean install` 
-
-
 
 
 ### Contact
