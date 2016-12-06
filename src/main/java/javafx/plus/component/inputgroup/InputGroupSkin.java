@@ -84,9 +84,9 @@ public class InputGroupSkin extends SkinBase<InputGroup> {
 
         //add in reverse way
         if(null!=leftAddOns && !leftAddOns.isEmpty()) {
-            ListIterator<Node> iterator = inputGroup.getLeftAddOns().listIterator(leftAddOns.size());
-            while (iterator.hasPrevious()) {
-                leftAddOnsPlaceholder.getChildren().add(iterator.previous());
+            ListIterator<Node> iterator = (ListIterator<Node>) leftAddOns.listIterator();
+            while (iterator.hasNext()) {
+                leftAddOnsPlaceholder.getChildren().add(0,iterator.next());
             }
         }
     }
