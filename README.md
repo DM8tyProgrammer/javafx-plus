@@ -1,6 +1,6 @@
 # javaFx-plus 
-![build status](https://travis-ci.org/theBeacon/javafx-plus.svg?branch=master "build status")
-[![codebeat badge](https://codebeat.co/badges/abc32331-b91d-4db8-8f9b-9ec4e93fc986)](https://codebeat.co/projects/github-com-thebeacon-javafx-plus)
+[![build status](https://travis-ci.org/theBeacon/javafx-plus.svg?branch=master "build status")](http://bit.ly/2gQTdsy)
+[![codebeat badge](https://codebeat.co/badges/abc32331-b91d-4db8-8f9b-9ec4e93fc986)](http://bit.ly/2g8SBus)
 
 javaFx-plus is a **JavaFx** extension presenting a set of GUI component.
 
