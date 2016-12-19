@@ -22,7 +22,7 @@ https://github.com/theBeacon/javafx-plus-demo
 ### Buliding the project
 
 #### Requirement  
-JDK 1.8 or above with maven installed
+JDK 1.8 with maven (3.3.x) installed.
 
 #### Building
 One can build the project simply typing the below command:
@@ -33,4 +33,10 @@ One can build the project simply typing the below command:
 ### Contact
 Everyone is welcome to for contribute to this project. 
 Reach to me the.beacon.44@gmail.com
+
+
+### Showcase
+
+#### InputGroup
+![input group](http://i.imgur.com/VOvKV7X.png)
 
