@@ -71,6 +71,7 @@ public class InputGroupSkin extends SkinBase<InputGroup> {
 
         textFieldPlaceholder.getChildren().add(inputGroup.getTextField());
 
+
     }
 
 
@@ -89,6 +90,7 @@ public class InputGroupSkin extends SkinBase<InputGroup> {
                 leftAddOnsPlaceholder.getChildren().add(0,iterator.next());
             }
         }
+
     }
 
 }
