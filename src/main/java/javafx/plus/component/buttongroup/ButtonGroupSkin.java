@@ -85,7 +85,7 @@ public class ButtonGroupSkin extends SkinBase<ButtonGroup> {
     }
 
     private void setSidesButton() {
-        if(null!= buttonGroup.getButtons() && !buttonGroup.getButtons().isEmpty()) {
+        if (null!= buttonGroup.getButtons() && !buttonGroup.getButtons().isEmpty()) {
             first.setValue(buttonGroup.getButtons().get(0));
         }
     }

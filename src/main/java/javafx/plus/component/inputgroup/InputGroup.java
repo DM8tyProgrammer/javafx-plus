@@ -25,26 +25,30 @@ public class InputGroup extends Control {
 
 
     public InputGroup() {
-        this(FXCollections.observableArrayList(),FXCollections.observableArrayList());
+        this(new TextField(), FXCollections.observableArrayList(), FXCollections.observableArrayList());
     }
 
-    public InputGroup(ObservableList<Node> leftAddOns, ObservableList<Node> rightAddOns) {
+    public InputGroup(TextField textField) {
+        this(textField, FXCollections.observableArrayList(), FXCollections.observableArrayList());
+    }
+
+    public InputGroup(TextField textField, ObservableList<Node> leftAddOns, ObservableList<Node> rightAddOns) {
         this.leftAddOns = new SimpleObjectProperty<>(leftAddOns);
         this.rightAddOns = new SimpleObjectProperty<>(rightAddOns);
-        textField = new TextField();
+        this.textField = textField;
     }
 
-
     public void addLeftAddOn(Node node) {
-        if(null == leftAddOns.get()){
+        if (null == leftAddOns.get()){
             leftAddOns.set(FXCollections.observableArrayList());
         }
 
         sanitize(node);
         leftAddOns.get().add(node);
     }
+
     public void addRightAddOn(Node node) {
-        if(null == rightAddOns.get()) {
+        if (null == rightAddOns.get()) {
          rightAddOns.set(FXCollections.observableArrayList());
         }
         sanitize(node);
@@ -69,7 +73,7 @@ public class InputGroup extends Control {
     }
 
     protected  void sanitize(Node node) {
-        if(node instanceof ImageView) {
+        if (node instanceof ImageView) {
             ImageView iv = (ImageView) node;
             iv.setPreserveRatio(true);
             iv.setFitHeight(26);

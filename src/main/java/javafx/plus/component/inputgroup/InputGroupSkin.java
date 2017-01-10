@@ -52,12 +52,12 @@ public class InputGroupSkin extends SkinBase<InputGroup> {
                 new ListChangeListener<Node>() {
                     @Override
                     public void onChanged(Change<? extends Node> c) {
-                        while(c.next()) {
-                            if(c.wasAdded()) {
+                        while (c.next()) {
+                            if (c.wasAdded()) {
                                 addToLeft(c.getAddedSubList());
                             }
 
-                            if(c.wasRemoved()) {
+                            if (c.wasRemoved()) {
                                 leftAddOnsPlaceholder.getChildren().removeAll(c.getRemoved());
                             }
 
@@ -84,10 +84,10 @@ public class InputGroupSkin extends SkinBase<InputGroup> {
     private void addToLeft(List<? extends Node> leftAddOns) {
 
         //add in reverse way
-        if(null!=leftAddOns && !leftAddOns.isEmpty()) {
+        if (null!=leftAddOns && !leftAddOns.isEmpty()) {
             ListIterator<Node> iterator = (ListIterator<Node>) leftAddOns.listIterator();
             while (iterator.hasNext()) {
-                leftAddOnsPlaceholder.getChildren().add(0,iterator.next());
+                leftAddOnsPlaceholder.getChildren().add(0, iterator.next());
             }
         }
 

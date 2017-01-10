@@ -72,12 +72,12 @@ public class BreadCrumb extends HBox {
         this.currentButton.addListener((observable, oldValue, newValue) -> {
 
             //enable earliar button
-            if(null != oldValue) {
+            if (null != oldValue) {
                 oldValue.setDisable(false);
             }
 
             //disable current button
-            if(null != newValue){
+            if (null != newValue){
                 newValue.setDisable(true);
             }
         });
@@ -87,7 +87,7 @@ public class BreadCrumb extends HBox {
 
 
     public void addButton(final Button button) {
-        if(null == button) {
+        if (null == button) {
             return;
         }
 
@@ -105,7 +105,7 @@ public class BreadCrumb extends HBox {
         });
 
 
-        if(null != separatorFactory) {
+        if (null != separatorFactory) {
             super.getChildren().addAll(button,this.separatorFactory.get().produce());
         }else {
             super.getChildren().addAll(button);

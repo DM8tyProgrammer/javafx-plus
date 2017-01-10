@@ -3,16 +3,13 @@ package javafx.plus.component.textfield;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.scene.control.Skin;
 import javafx.scene.control.TextField;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-public class MaskText extends TextField {
+public class MaskedTextField extends TextField {
 
     private static final Character DEFAULT_MASK_CHARACTER = Character.valueOf('_');
     private static final String DEFAULT_MASK_PATTERN = "";
@@ -22,15 +19,16 @@ public class MaskText extends TextField {
     private Character maskCharacter;
     private Map<Character, Pattern> patterns;
 
-    public MaskText() {
+    public MaskedTextField() {
         this(DEFAULT_MASK_PATTERN, DEFAULT_MASK_CHARACTER);
     }
 
-    public MaskText(String maskPattern) {
+    public MaskedTextField(String maskPattern) {
         this(maskPattern, DEFAULT_MASK_CHARACTER);
     }
 
-    public MaskText(String maskPattern, Character maskCharacter) {
+    public MaskedTextField(String maskPattern, Character maskCharacter) {
+
         this.maskPattern = new SimpleStringProperty(maskPattern);
         this.maskCharacter = maskCharacter;
 
@@ -44,6 +42,7 @@ public class MaskText extends TextField {
     }
 
     protected void init() {
+
         super.focusedProperty().addListener((observable, oldValue, newValue) -> {
             if (newValue) {
                 super.deselect();
@@ -64,7 +63,7 @@ public class MaskText extends TextField {
         int firstMasked = -1;
         StringBuilder builder = new StringBuilder();
         char[] characters = this.maskPattern.get().toCharArray();
-        for(int i=0; i< characters.length; i++ ) {
+        for (int i = 0; i < characters.length; i++ ) {
             if(this.patterns.containsKey(Character.valueOf(characters[i]))) {
                 builder.append(this.maskCharacter);
                 if(firstMasked == -1) {
@@ -127,4 +126,6 @@ public class MaskText extends TextField {
         }
 
     }
+
+
 }
