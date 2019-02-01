@@ -121,9 +121,15 @@ public class BreadCrumb extends HBox {
     }
 
     public void setButtons(Button ... buttons) {
+        clearButtons();
         for(Button b : buttons) {
             this.addButton(b);
         }
+    }
+
+    public void clearButtons() {
+        this.currentButton.set(null);
+        super.getChildren().clear();
     }
 
     public void setSeparatorFactory(SeparatorFactory separatorFactory) {
